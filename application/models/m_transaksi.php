@@ -3,7 +3,7 @@
 /**
 * 
 */
-class M_transaksi extends CI_Model{
+class m_transaksi extends CI_Model{
 	// model add data
 	function add_data_spl($dataspl)
 	{
@@ -45,6 +45,36 @@ class M_transaksi extends CI_Model{
     }
     function get_project(){
         $query = $this->db->get_where('project');
+        return $query->result();
+    }
+
+    function get_last_id_cuti(){
+        $this->db->limit(1);
+        $this->db->order_by('id_fcuti','desc');  
+        $query = $this->db->get_where('form_cuti');
+        return $query->result();
+    }
+
+    function get_data_cuti($id_karyawan){
+        $query = $this->db->get_where('form_cuti', array('id_karyawan' => $id_karyawan));
+        return $query->result();
+    }
+
+    function get_list_cuti(){
+        $this->db->select('*');
+        $this->db->from('form_cuti');
+        $this->db->join('karyawan', 'form_cuti.id_karyawan = karyawan.id_karyawan');
+        $this->db->join('jabatan', 'karyawan.id_jabatan = jabatan.id_jabatan');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function get_konfirmasi_cuti($id_fcuti){
+        $this->db->select('*');
+        $this->db->from('form_cuti');
+        $this->db->join('karyawan', 'form_cuti.id_karyawan = karyawan.id_karyawan');
+        $this->db->where('id_fcuti', $id_fcuti);
+        $query = $this->db->get();
         return $query->result();
     }
 }

@@ -33,6 +33,7 @@
     <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/style-responsive.css" rel="stylesheet" />
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -117,6 +118,7 @@
                               </a>
                               <ul class="sub">
                                   <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_konfirmasi_cuti">Konfirmasi Cuti</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_project">Project</a></li>
                               </ul>
@@ -137,18 +139,28 @@
                       } else {
                         ?>
                         <li class="sub-menu">
-                              <a href="index.html">
-                                  <i class="fa fa-laptop"></i>
-                                  <span>Transaksi</span>
-                              </a>
-                          </li>
+                            <a href="index.html">
+                                <i class="fa fa-laptop"></i>
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_project">Project</a></li>
+                            </ul>
+                        </li>
 
-                          <li class="sub-menu">
-                              <a href="index.html">
-                                  <i class="fa fa-tasks"></i>
-                                  <span>Laporan</span>
-                              </a>
-                          </li>
+                        <li class="sub-menu">
+                            <a href="index.html">
+                                <i class="fa fa-tasks"></i>
+                                <span>Laporan</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a  href="<?php echo base_url(); ?>C_lap_cuti_karyawan">Laporan Cuti Karyawan</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_lap_spl">Laporan SPL</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_dpt/index">Laporan Project</a></li>
+                            </ul>
+                        </li>
                        <?php
                     }
                   }

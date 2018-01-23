@@ -5,16 +5,18 @@ class C_form_cuti extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model("M_master");
-		$this->load->model("M_transaksi");
+		$this->load->model("m_master");
+		$this->load->model("m_transaksi");
 	}
 	public function index()
 	{
 		if($this->session->userdata('logged_in') == TRUE){
-			$data['data_form_cuti'] = $this->M_transaksi->get_karyawan_cuti();
-			$data['data_karyawan'] = $this->M_master->get_karyawan();
 			$id_karyawan = $this->session->userdata('id_karyawan');
-			$data['karyawan'] = $this->M_master->get_data_karyawan($id_karyawan);
+			// $data['data_form_cuti'] = $this->m_transaksi->get_karyawan_cuti();
+			$data['data_karyawan'] = $this->m_master->get_karyawan();
+			$data['karyawan'] = $this->m_master->get_data_karyawan($id_karyawan);
+			$data['last_id'] = $this->m_transaksi->get_last_id_cuti();
+			$data['data_cuti'] = $this->m_transaksi->get_data_cuti($id_karyawan);
 			$this->load->view('v_header',$data);
 			$this->load->view('v_form_cuti', $data);
 			$this->load->view('v_footer');
@@ -24,24 +26,23 @@ class C_form_cuti extends CI_Controller {
 		}
 	}
 	public function add_form_cuti(){
-		$id_fcuti = $this->input->post('id_fcuti');
-		$tgl_fcuti = $this->input->post('tgl_fcuti');
-		$jenis_cuti = $this->input->post('jenis_cuti');
-		$tgl_mulai = $this->input->post('tgl_mulai');
-		$tgl_akhir = $this->input->post('tgl_akhir');
-		$alasan = $this->input->post('alasan');
-		$id_karyawan = $this->input->post('id_karyawan');
+		$id_karyawan = $this->session->userdata('id_karyawan');
+		$tgl_fcuti = $this->input->post('tgl_pengajuan');
+		$tgl_mulai = date('Y-m-d', strtotime( $this->input->post('cuti_awal') ));
+		$tgl_akhir = date('Y-m-d', strtotime( $this->input->post('cuti_akhir') ));
+		$tot_cuti = $this->input->post('tot_cuti');
+		$ket = $this->input->post('ket');
 		if ($this->input->post('input')) {
 			$dataform_cuti = array(
-				'id_fcuti' => $id_fcuti,
-				'tgl_fcuti' => $tgl_fcuti,
-				'jenis_cuti' => $jenis_cuti,
+				'id_karyawan' => $id_karyawan,
+				'tgl_pengajuan' => $tgl_fcuti,
 				'tgl_mulai' => $tgl_mulai,
 				'tgl_akhir' => $tgl_akhir,
-				'alasan' => $alasan,
-				'id_karyawan' => $id_karyawan
+				'lama_cuti' => $tot_cuti,
+				'ket' => $ket,
+				'status_pengajuan' => 1
 				);
-			$this->M_transaksi->add_data_form_cuti($dataform_cuti);
+			$this->m_transaksi->add_data_form_cuti($dataform_cuti);
 				}
 			redirect("C_form_cuti");
 	}

@@ -3,7 +3,7 @@
 /**
 * 
 */
-class M_master extends CI_Model{
+class m_master extends CI_Model{
 	// model add data
 	function add_data_karyawan($datakaryawan)
 	{
