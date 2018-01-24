@@ -32,7 +32,6 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/style-responsive.css" rel="stylesheet" />
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>

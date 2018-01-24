@@ -5,14 +5,14 @@ class C_spl extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model("m_transaksi");
+		$this->load->model("M_transaksi");
 	}
 	public function index()
 	{
 		if($this->session->userdata('logged_in') == TRUE){
-			$dataspl['data_spl']=$this->m_transaksi->get_spl();
+			$dataspl['data_spl']=$this->M_transaksi->get_spl();
 			$id_karyawan = $this->session->userdata('id_karyawan');
-			$data['karyawan'] = $this->m_master->get_data_karyawan($id_karyawan);
+			$data['karyawan'] = $this->M_master->get_data_karyawan($id_karyawan);
 			$this->load->view('v_header'$data);
 			$this->load->view('v_spl', $dataspl);
 			$this->load->view('v_footer');
@@ -39,7 +39,7 @@ class C_spl extends CI_Controller {
 				'jam_lembur' => $jam_lembur,
 				'id_project' => $id_project
 				);
-			$this->m_transaksi->add_data_spl($dataspl);
+			$this->M_transaksi->add_data_spl($dataspl);
 				}
 			redirect("C_spl");
 	}

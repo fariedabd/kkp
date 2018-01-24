@@ -23,7 +23,7 @@
                     <div class="panel-body">
                       <?php
                       $attributes = array('class' => 'cmxform form-horizontal tasi-form');
-                      echo form_open_multipart(site_url("C_form_cuti/add_form_cuti"), $attributes);
+                      echo form_open_multipart(site_url("C_konfirmasi_cuti/konfirmasi_cuti"), $attributes);
                       ?>
                       <?php
                         foreach ($last_id as $row) {
@@ -44,43 +44,45 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Tanggal Cuti</label>
-                          <div class="col-md-7">
-                            <label class="control-label col-md-12"><b>2018-01-01</b> s/d <b>2018-01-03</b></label>
+                          <div class="col-md-9">
+                            <label class="control-label col-md-12">
+                              <b class="tgl_mulai"></b> s/d <b class="tgl_akhir"></b>
+                            </label>
                           </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Lama Cuti</label>
                           <div class="col-md-9">
-                            <label class="control-label col-md-3"><b>3</b></label>
+                            <label class="control-label col-md-3"><b><div class="lm_cuti"></div></b></label>
                           </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Alasan</label>
                           <div class="col-md-9">
                             <label class="control-label col-md-12">
-                              asdasdasdas asdddddddddd asdddddddddddddddddddddd aaaaaaaaaaaaaaaaaa assssssssssssss qweeeeeeeeeeee qwe
+                              <b><div class="alasan"></div></b>
                             </label>
                           </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Status</label>
                           <div class="col-md-5">
-                            <select class="form-control">
-                              <option>Menunggu Konfirmasi</option>
-                              <option>Disetujui</option>
-                              <option>Ditolak</option>
+                            <select class="form-control" id="status" name="status">
+                              <option value="1">Menunggu Konfirmasi</option>
+                              <option value="2">Disetujui</option>
+                              <option value="3">Ditolak</option>
                             </select>
                           </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Keterangan</label>
                           <div class="col-md-9">
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" id="ket_dir" name="ket_dir"></textarea>
                           </div>
                       </div>
                       <div class="form-group">
                         <div class="col-lg-offset-3 col-lg-10">
-                          <input type="submit" name="input" id="btn_save" class="btn btn-success" value="Save">
+                          <input type="submit" name="btn_confirm" id="btn_confirm" class="btn btn-success" value="Save">
                           <input type="reset" name="reset" class="btn btn-danger" value="Reset">
                         </div>
                       </div>
@@ -105,34 +107,40 @@
                     <tbody>
                       <?php
                         foreach ($list_cuti as $row) {
-                          ?>
-                            <tr>
-                              <td><?php echo $row->id_karyawan; ?></td>
-                              <td><?php echo $row->nm_karyawan; ?></td>
-                              <td><?php echo $row->nm_jabatan; ?></td>
-                              <td><?php echo $row->tgl_pengajuan; ?></td>
-                              <td align="center">
-                                <?php
-                                  if($row->status_pengajuan == 1){
-                                    $sts = "Menunggu konfirmasi";
-                                  }else if($row->status_pengajuan == 2){
-                                    $sts = "Disetujui";
-                                  }else if($row->status_pengajuan == 3){
-                                    $sts = "Tidak disetujui";
-                                  }else{
-                                    $sts = "";
-                                  }
-                                ?>
-                                <span class="label label-warning"><?php echo $sts; ?></span>
-                              </td>
-                              <td>
-                                <div class="btn btn-default">
-                                  <a data-toggle="modal" href="#myModal" id="btn_view" onclick="get_karyawan_cuti('<?php echo $row->id_fcuti; ?>')">
-                                  <i class="fa fa-eye"></i></a>
-                                </div>
-                              </td>
-                            </tr>
-                          <?php
+                          if($row->status_pengajuan == "1"){
+                            ?>
+                              <tr>
+                                <td><?php echo $row->id_karyawan; ?></td>
+                                <td><?php echo $row->nm_karyawan; ?></td>
+                                <td><?php echo $row->nm_jabatan; ?></td>
+                                <td><?php echo $row->tgl_pengajuan; ?></td>
+                                <td align="center">
+                                  <?php
+                                    if($row->status_pengajuan == 1){
+                                      $sts = "Menunggu konfirmasi";
+                                      $cls = "label label-warning";
+                                    }else if($row->status_pengajuan == 2){
+                                      $sts = "Disetujui";
+                                      $cls = "label label-primary";
+                                    }else if($row->status_pengajuan == 3){
+                                      $sts = "Tidak disetujui";
+                                      $cls = "label label-danger";
+                                    }else{
+                                      $sts = "";
+                                      $cls = "";
+                                    }
+                                  ?>
+                                  <span class="<?php echo $cls; ?>"><?php echo $sts; ?></span>
+                                </td>
+                                <td>
+                                  <div class="btn btn-default">
+                                    <a data-toggle="modal" href="#myModal" id="btn_view" onclick="get_karyawan_cuti('<?php echo $row->id_fcuti; ?>')">
+                                    <i class="fa fa-eye"></i></a>
+                                  </div>
+                                </td>
+                              </tr>
+                            <?php
+                          }
                         }
                       ?>
                     </tbody>
@@ -145,18 +153,27 @@
         </section>
 
 <script>
-  function get_karyawan_cuti(id){
-    $.ajax({
-      url: "<?php echo base_url("c_konfirmasi_cuti/konfirmasi_cuti"); ?>",
-      method: "POST",
-      dataType: 'json',
-      data: {id:id},
-      success:function(data){
-        var src = data;
-        // var obj = JSON.parse(data);
-        // var nm_karyawan = obj.name;
-        alert(src);
-      }
+  function get_karyawan_cuti(id_cuti){
+    
+    $(document).ready(function(){
+        $.ajax({
+          url: "<?php echo base_url("C_konfirmasi_cuti/get_konfirmasi_cuti"); ?>",
+          type: "post",
+          dataType: 'json',
+          data: {id_cuti:id_cuti},
+          success:function(data){
+            // var src = data;
+            var obj = JSON.parse(JSON.stringify(data));
+            $("#id_fcuti").val(obj.id_fcuti);
+            $(".nm_karyawan").html(obj.nm_karyawan);
+            $("#status").val(obj.status_pengajuan);
+            $(".tgl_mulai").html(obj.tgl_mulai);
+            $(".tgl_akhir").html(obj.tgl_akhir);
+            $(".lm_cuti").html(obj.lama_cuti+" hari");
+            $(".alasan").html(obj.alasan);
+            console.log(obj);
+          }
+        });
     });
   }
   // Untuk hitung jumlah cuti

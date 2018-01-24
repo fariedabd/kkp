@@ -3,7 +3,7 @@
 /**
 * 
 */
-class m_transaksi extends CI_Model{
+class M_transaksi extends CI_Model{
 	// model add data
 	function add_data_spl($dataspl)
 	{
@@ -76,5 +76,10 @@ class m_transaksi extends CI_Model{
         $this->db->where('id_fcuti', $id_fcuti);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    function update_konfirmasi_cuti($id_fcuti,$data){
+        $this->db->where('id_fcuti', $id_fcuti);
+        $this->db->update('form_cuti', $data);
     }
 }

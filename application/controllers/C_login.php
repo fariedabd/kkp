@@ -5,7 +5,7 @@ class C_login extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model("m_master");
+		$this->load->model("M_master");
 	}
 
 	public function index()
@@ -17,7 +17,7 @@ class C_login extends CI_Controller {
 		$id_karyawan = $this->input->post('id_karyawan');
 		$password = $this->input->post('password');
 
-		$data_login = $this->m_master->get_user_login($id_karyawan,$password);
+		$data_login = $this->M_master->get_user_login($id_karyawan,$password);
 		
 		if(!empty($data_login)){
 			$session_data = array(

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 20, 2018 at 04:25 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: localhost:80
+-- Generation Time: Jan 24, 2018 at 04:39 PM
+-- Server version: 5.7.20
+-- PHP Version: 5.6.32-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -60,12 +60,14 @@ CREATE TABLE `detil_project` (
 --
 
 CREATE TABLE `form_cuti` (
-  `id_fcuti` varchar(10) NOT NULL,
+  `id_fcuti` int(10) NOT NULL,
   `id_karyawan` varchar(10) NOT NULL,
   `tgl_pengajuan` date NOT NULL,
   `tgl_mulai` date NOT NULL,
-  `tgl_kembali` date NOT NULL,
+  `tgl_akhir` date NOT NULL,
   `lama_cuti` int(2) NOT NULL,
+  `alasan` text NOT NULL,
+  `ket_dir` text NOT NULL,
   `status_pengajuan` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -73,8 +75,9 @@ CREATE TABLE `form_cuti` (
 -- Dumping data for table `form_cuti`
 --
 
-INSERT INTO `form_cuti` (`id_fcuti`, `id_karyawan`, `tgl_pengajuan`, `tgl_mulai`, `tgl_kembali`, `lama_cuti`, `status_pengajuan`) VALUES
-('1000', '0002', '2018-01-20', '2018-01-22', '2018-01-24', 2, 1);
+INSERT INTO `form_cuti` (`id_fcuti`, `id_karyawan`, `tgl_pengajuan`, `tgl_mulai`, `tgl_akhir`, `lama_cuti`, `alasan`, `ket_dir`, `status_pengajuan`) VALUES
+(1, '0002', '2018-01-20', '2018-01-22', '2018-01-24', 2, 'Bosen Kerja', '', 1),
+(2, '0003', '2018-01-22', '2018-01-01', '2018-01-05', 5, 'asd', 'asdas', 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,9 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nm_jabatan`) VALUES
-('01', 'Direktur');
+('01', 'Direktur'),
+('02', 'HRD'),
+('03', 'Manager');
 
 -- --------------------------------------------------------
 
@@ -186,6 +191,15 @@ ALTER TABLE `karyawan`
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id_project`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `form_cuti`
+--
+ALTER TABLE `form_cuti`
+  MODIFY `id_fcuti` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -53,7 +53,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3">Keterangan</label>
                           <div class="col-md-9">
-                            <textarea class="form-control" cols="30" rows="3" name="ket" placeholder="Alamat"></textarea>
+                            <textarea class="form-control" cols="30" rows="3" name="alasan" placeholder="Alamat"></textarea>
                           </div>
                       </div>
                       <div class="form-group">
@@ -112,20 +112,24 @@
                               <td><?php echo $row->tgl_mulai; ?></td>
                               <td><?php echo $row->tgl_akhir; ?></td>
                               <td><?php echo $row->lama_cuti; ?></td>
-                              <td><?php echo $row->ket; ?></td>
+                              <td><?php echo $row->alasan; ?></td>
                               <td>
                                 <?php
                                   if($row->status_pengajuan == 1){
                                     $sts = "Menunggu konfirmasi";
+                                    $cls = "label label-warning";
                                   }else if($row->status_pengajuan == 2){
                                     $sts = "Disetujui";
+                                    $cls = "label label-primary";
                                   }else if($row->status_pengajuan == 3){
                                     $sts = "Tidak disetujui";
+                                    $cls = "label label-danger";
                                   }else{
                                     $sts = "";
+                                    $cls = "";
                                   }
                                 ?>
-                                <span class="label label-warning"><?php echo $sts; ?></span>
+                                <span class="<?php echo $cls; ?>"><?php echo $sts; ?></span>
                               </td>
                               <td></td>
                             </tr>
