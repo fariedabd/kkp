@@ -40,6 +40,7 @@
                         <label class="control-label col-md-3">Nama</label>
                           <div class="col-md-5">
                             <label class="control-label col-md-3"><b><div class="nm_karyawan"></div></b></label>
+                            <input type="hidden" name="id_karyawan" id="id_karyawan" />
                           </div>
                       </div>
                       <div class="form-group">
@@ -52,8 +53,8 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3">Lama Cuti</label>
-                          <div class="col-md-9">
-                            <label class="control-label col-md-3"><b><div class="lm_cuti"></div></b></label>
+                          <div class="col-md-2">
+                            <input type="text" class="form-control" name="lm_cuti" id="lm_cuti" value="" readonly />
                           </div>
                       </div>
                       <div class="form-group">
@@ -164,15 +165,14 @@
           success:function(data){
             // var src = data;
             var obj = JSON.parse(JSON.stringify(data));
+            $("#id_karyawan").val(obj.id_karyawan);
             $("#id_fcuti").val(obj.id_fcuti);
             $(".nm_karyawan").html(obj.nm_karyawan);
             $("#status").val(obj.status_pengajuan);
             $(".tgl_mulai").html(obj.tgl_mulai);
             $(".tgl_akhir").html(obj.tgl_akhir);
-            $(".lm_cuti").html(obj.lama_cuti+" hari");
-            $(".alasan").html(obj.alasan);
-            console.log(obj);
-          }
+            $("#lm_cuti").val(obj.lama_cuti);
+            $(".alasan").html(obj.alasan);          }
         });
     });
   }

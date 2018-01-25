@@ -50,6 +50,12 @@
                           </div>
                       </div>
                       <div class="form-group">
+                        <label class="control-label col-md-3">E-Mail</label>
+                          <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="E-Mail" name="email" id="email" />
+                          </div>
+                      </div>
+                      <div class="form-group">
                         <label class="control-label col-md-3">Password</label>
                           <div class="col-md-5">
                             <input type="text" class="form-control" placeholder="Password" name="password" id="password" />
@@ -150,9 +156,11 @@
                                                                                                 '<?php echo $row_data->nm_karyawan; ?>',
                                                                                                 '<?php echo $row_data->alamat; ?>',
                                                                                                 '<?php echo $row_data->no_telp; ?>',
+                                                                                                '<?php echo $row_data->email; ?>',
+                                                                                                '<?php echo $row_data->password; ?>',
                                                                                                 '<?php echo $row_data->id_jabatan; ?>',
                                                                                                 '<?php echo $row_data->id_manager; ?>',
-                                                                                                '<?php echo $row_data->sisa_cuti; ?>',
+                                                                                                '<?php echo $row_data->sisa_cuti; ?>'
                                                                                                 )">
                           <i class="fa fa-edit"></i></a>
                         </div>
@@ -180,17 +188,21 @@
               });
             });
 
-                function get_karyawan(id,nama,alamat,telepon,id_jabatan,id_manager,sisa_cuti){
+                function get_karyawan(id,nama,alamat,telepon,email,password,id_jabatan,id_manager,sisa_cuti){
                     $(document).ready(function(){
                       $('#id_karyawan').val(id);
                       $('#nm_karyawan').val(nama);
                       $('#alamat').val(alamat);
                       $('#telepon').val(telepon);
+                      $('#email').val(email);
+                      $('#password').val(password);
                       $('#id_jabatan').val(id_jabatan);
                       $('#id_manager').val(id_manager);
                       $('#sisa_cuti').val(sisa_cuti);
-                      $("#btn_update").removeAttr("disabled");
+                      $('#id_karyawan').removeAttr("disabled");
+                      $('#btn_update').removeAttr("disabled");
                       $('#btn_save').attr("disabled", true);
+                      $('#password').attr("aria-hidden");
                     });
                 }
         </script>

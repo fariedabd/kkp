@@ -69,4 +69,12 @@ class M_master extends CI_Model{
     	$query = $this->db->get_where('karyawan', array('id_karyawan' => $id_karyawan, 'password'=> $password));
     	return $query->result();
     }
+    function get_list_cuti(){
+        $this->db->select('*');
+        $this->db->from('form_cuti');
+        $this->db->join('karyawan', 'form_cuti.id_karyawan = karyawan.id_karyawan');
+        $this->db->join('jabatan', 'karyawan.id_jabatan = jabatan.id_jabatan');
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

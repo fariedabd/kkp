@@ -30,6 +30,8 @@ class C_konfirmasi_cuti extends CI_Controller {
 		$id_fcuti = $this->input->post("id_fcuti");
 		$status = $this->input->post("status");
 		$ket_dir = $this->input->post("ket_dir");
+		$lm_cuti = $this->input->post("lm_cuti");
+		$id_karyawan = $this->input->post("id_karyawan");
 
 		if($this->input->post("btn_confirm")){
 			$data = array(
@@ -37,6 +39,9 @@ class C_konfirmasi_cuti extends CI_Controller {
 				'status_pengajuan' => $status,
 				'ket_dir' => $ket_dir
 			);
+
+			$update_cuti = $lm_cuti;
+			$this->M_transaksi->update_sisa_cuti($id_karyawan,$update_cuti);
 			$this->M_transaksi->update_konfirmasi_cuti($id_fcuti,$data);
 		}
 		redirect('C_konfirmasi_cuti');

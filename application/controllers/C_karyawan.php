@@ -31,6 +31,7 @@ class C_karyawan extends CI_Controller {
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$id_manager = $this->input->post('id_manager');
+		$id_jabatan = $this->input->post('id_jabatan');
 		$id_departmen = $this->input->post('id_departmen');
 		$sisa_cuti = $this->input->post('sisa_cuti');
 		if ($this->input->post('input')) {			
@@ -42,6 +43,7 @@ class C_karyawan extends CI_Controller {
 				'email' => $email,
 				'password' => $password,
 				'id_manager' => $id_manager,
+				'id_jabatan' => $id_jabatan,
 				'id_departmen' => $id_departmen,
 				'sisa_cuti' => $sisa_cuti
 				);
@@ -53,6 +55,7 @@ class C_karyawan extends CI_Controller {
 						'no_telp' => $telepon,
 						'email' => $email,
 						'password' => $password,
+						'id_jabatan' => $id_jabatan,
 						'id_manager' => $id_manager,
 						'id_departmen' => $id_departmen,
 						'sisa_cuti' => $sisa_cuti

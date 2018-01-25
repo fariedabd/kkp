@@ -5,6 +5,7 @@ class C_spl extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
+		$this->load->model("M_master");
 		$this->load->model("M_transaksi");
 	}
 	public function index()
@@ -13,7 +14,7 @@ class C_spl extends CI_Controller {
 			$dataspl['data_spl']=$this->M_transaksi->get_spl();
 			$id_karyawan = $this->session->userdata('id_karyawan');
 			$data['karyawan'] = $this->M_master->get_data_karyawan($id_karyawan);
-			$this->load->view('v_header'$data);
+			$this->load->view('v_header',$data);
 			$this->load->view('v_spl', $dataspl);
 			$this->load->view('v_footer');
 		}else{

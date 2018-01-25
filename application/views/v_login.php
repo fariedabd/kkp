@@ -37,12 +37,6 @@
         <div class="login-wrap">
             <input type="text" name="id_karyawan" class="form-control" placeholder="User ID" autofocus>
             <input type="password" name="password" class="form-control" placeholder="Password">
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Ingat Saya
-                <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> Lupa Password?</a>
-                </span>
-            </label>
             <input type="submit" class="btn btn-lg btn-login btn-block" value="LOGIN" name="login" />
             </div>
 

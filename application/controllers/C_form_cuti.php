@@ -40,6 +40,7 @@ class C_form_cuti extends CI_Controller {
 				'tgl_akhir' => $tgl_akhir,
 				'lama_cuti' => $tot_cuti,
 				'alasan' => $alasan,
+				'ket_dir' => '',
 				'status_pengajuan' => 1
 				);
 			$this->M_transaksi->add_data_form_cuti($dataform_cuti);

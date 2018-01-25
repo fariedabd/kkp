@@ -32,6 +32,7 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>css/style-responsive.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>css/invoice-print.css" rel="stylesheet" media="print">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -48,7 +49,7 @@
               <div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
           </div>
           <!--logo start-->
-          <a href="<?php echo base_url(); ?>C_index" class="logo" >PT<span>INTEGRASI MEDIA KREASI</span></a>
+          <a href="<?php echo base_url(); ?>C_index" class="logo" style="margin-top: 6px"><img src="img/logo.png"></span></a>
           <!--logo end-->
           <div class="top-nav ">
               <ul class="nav pull-right top-menu">
@@ -66,7 +67,9 @@
                       </a>
                       <ul class="dropdown-menu extended logout">
                           <div class="log-arrow-up"></div>
-                          <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                          <li> &nbsp;</li>
+                          <li><a href="<?php echo base_url(); ?>C_profile"><i class=" fa fa-suitecase"></i>Profile</a></li>
+
                           <li><a href="<?php echo base_url(); ?>C_login/logout"><i class="fa fa-key"></i> Log Out</a></li>
                       </ul>
                   </li>
@@ -82,7 +85,7 @@
               <ul class="sidebar-menu" id="nav-accordion">
                   <?php
                     foreach ($karyawan as $row) {
-                      if($row->id_jabatan == '02'){
+                      if($row->id_jabatan == '02'){  //HRD
                         ?>
                           <li class="sub-menu">
                               <a href="index.html">
@@ -98,25 +101,47 @@
 
                           <li class="sub-menu">
                               <a href="index.html">
+                                  <i class="fa fa-laptop"></i>
+                                  <span>Transaksi</span>
+                              </a>
+                              <ul class="sub">
+                                  <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_project">Project</a></li>
+                              </ul>
+                          </li>
+
+                          <li class="sub-menu">
+                              <a href="index.html">
                                   <i class="fa fa-tasks"></i>
                                   <span>Laporan</span>
                               </a>
                               <ul class="sub">
-                                  <li><a  href="<?php echo base_url(); ?>C_lap_cuti_karyawan">Laporan Cuti Karyawan</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_lap_cuti">Laporan Cuti</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_lap_spl">Laporan SPL</a></li>
-                                  <li><a  href="<?php echo base_url(); ?>C_dpt/index">Laporan Project</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_lap_project">Laporan Project</a></li>
                               </ul>
                           </li>
                         <?php
-                      } else if($row->id_jabatan == '01'){
+                      } else if($row->id_jabatan == '01'){   //Direktur
                         ?>
+                          <li class="sub-menu">
+                              <a href="index.html">
+                                  <i class="fa fa-book"></i>
+                                  <span>Data Master</span>
+                              </a>
+                              <ul class="sub" disabled="true">
+                                  <li><a href="<?php echo base_url(); ?>C_karyawan">Karyawan</a></li>
+                                  <li><a href="<?php echo base_url(); ?>C_dpt">Departemen</a></li>
+                                  <li><a href="<?php echo base_url(); ?>C_jbt">Jabatan</a></li>
+                              </ul>
+                          </li>
                           <li class="sub-menu">
                               <a href="index.html">
                                   <i class="fa fa-laptop"></i>
                                   <span>Transaksi</span>
                               </a>
                               <ul class="sub">
-                                  <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_konfirmasi_cuti">Konfirmasi Cuti</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_project">Project</a></li>
@@ -129,13 +154,13 @@
                                   <span>Laporan</span>
                               </a>
                               <ul class="sub">
-                                  <li><a  href="<?php echo base_url(); ?>C_lap_cuti_karyawan">Laporan Cuti Karyawan</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_lap_cuti">Laporan Cuti</a></li>
                                   <li><a  href="<?php echo base_url(); ?>C_lap_spl">Laporan SPL</a></li>
-                                  <li><a  href="<?php echo base_url(); ?>C_dpt/index">Laporan Project</a></li>
+                                  <li><a  href="<?php echo base_url(); ?>C_lap_project">Laporan Project</a></li>
                               </ul>
                           </li>
                          <?php
-                      } else {
+                      } else if($row->id_jabatan == '03' || $row->id_jabatan == '04') {
                         ?>
                         <li class="sub-menu">
                             <a href="index.html">
@@ -144,6 +169,7 @@
                             </a>
                             <ul class="sub">
                                 <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_konfirmasi_cuti">Konfirmasi Cuti</a>
                                 <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
                                 <li><a  href="<?php echo base_url(); ?>C_project">Project</a></li>
                             </ul>
@@ -155,12 +181,17 @@
                                 <span>Laporan</span>
                             </a>
                             <ul class="sub">
-                                <li><a  href="<?php echo base_url(); ?>C_lap_cuti_karyawan">Laporan Cuti Karyawan</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_lap_cuti">Laporan Cuti</a></li>
                                 <li><a  href="<?php echo base_url(); ?>C_lap_spl">Laporan SPL</a></li>
-                                <li><a  href="<?php echo base_url(); ?>C_dpt/index">Laporan Project</a></li>
+                                <li><a  href="<?php echo base_url(); ?>C_lap_project">Laporan Project</a></li>
                             </ul>
                         </li>
                        <?php
+                    } else {
+                      ?>
+                        <li><a  href="<?php echo base_url(); ?>C_form_cuti">Form Cuti</a></li>
+                        <li><a  href="<?php echo base_url(); ?>C_spl">SPL</a></li>
+                      <?php
                     }
                   }
                   ?>
